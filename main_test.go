@@ -39,6 +39,16 @@ func TestParseArgsSelectsInteractiveMode(t *testing.T) {
 	}
 }
 
+func TestParseArgsAcceptsAppVersionFlag(t *testing.T) {
+	_, interactive, err := parseArgs([]string{"-app-version"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if interactive {
+		t.Fatal("-app-version must not enter interactive mode")
+	}
+}
+
 func TestPromptOptionsAcceptsDocumentedDefaults(t *testing.T) {
 	in := strings.NewReader("hello\n" + strings.Repeat("\n", 13))
 	var out bytes.Buffer

@@ -2,6 +2,8 @@
 
 `cliimqr` 是一个 Go 编写的二维码生成工具，通过草料二维码网页当前使用的请求链生成美化二维码。它不启动浏览器，支持：
 
+当前程序版本：`1.0`。
+
 - 终端交互向导；
 - 完整命令行参数；
 - 本地 PNG/JPG/BMP Logo；
@@ -14,7 +16,7 @@
 
 ## 1. 最快使用
 
-仓库已经包含当前 macOS Apple Silicon 可执行文件。进入项目目录后可以直接运行：
+可以从 [GitHub Releases](https://github.com/hhhaiai/cailiao/releases) 下载 Linux、Windows 或 macOS 对应架构的发行包。仓库也包含当前 macOS Apple Silicon 可执行文件，进入项目目录后可以直接运行：
 
 ```bash
 cd cailiao
@@ -57,6 +59,12 @@ go build -trimpath -buildvcs=false -o cliimqr .
 
 ```bash
 ./cliimqr -h
+```
+
+查看程序版本：
+
+```bash
+./cliimqr -app-version
 ```
 
 运行测试：
@@ -263,6 +271,7 @@ https://api.dwchainless.com/
 
 | 参数 | 默认值 | 说明 |
 |---|---:|---|
+| `-app-version` | `false` | 显示程序版本并退出 |
 | `-interactive` | `false` | 强制进入终端向导；完全不带参数时也会自动进入 |
 | `-text` | 无 | 二维码编码内容；命令行模式必填 |
 | `-logo` | 无 | 本地 Logo 文件路径 |

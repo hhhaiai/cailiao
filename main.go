@@ -22,12 +22,13 @@ import (
 )
 
 const (
+	appVersion    = "1.0"
 	homeURL       = "https://cli.im/"
 	saveURL       = "https://cli.im/Apis/QrCode/saveStatic"
 	uploadURL     = "https://upload-api.cli.im/upload?kid=cliim"
 	paintURL      = "https://qr.api.cli.im/create/paintLabelByParam"
 	detectURL     = "https://qrdetector-api.cli.im/v1/detect_binary"
-	defaultUA     = "Mozilla/5.0 (compatible; cliimqr/1.0)"
+	defaultUA     = "Mozilla/5.0 (compatible; cliimqr/" + appVersion + ")"
 	defaultRefURL = "https://cli.im/text/other"
 )
 
@@ -61,21 +62,22 @@ var hexColor = regexp.MustCompile(`^#[0-9A-Fa-f]{6}$`)
 var errCancelled = errors.New("cancelled")
 
 type options struct {
-	Text       string
-	LogoFile   string
-	LogoURL    string
-	Foreground string
-	Background string
-	Dot        string
-	Eye        string
-	EyeOuter   string
-	EyeInner   string
-	Margin     int
-	Level      string
-	Version    int
-	Size       int
-	Output     string
-	Verify     bool
+	Text           string
+	LogoFile       string
+	LogoURL        string
+	Foreground     string
+	Background     string
+	Dot            string
+	Eye            string
+	EyeOuter       string
+	EyeInner       string
+	Margin         int
+	Level          string
+	Version        int
+	Size           int
+	Output         string
+	Verify         bool
+	ShowAppVersion bool
 }
 
 type mhConfig struct {
@@ -171,6 +173,10 @@ func main() {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(2)
 	}
+	if opts.ShowAppVersion {
+		fmt.Printf("cliimqr %s\n", appVersion)
+		return
+	}
 	if interactive {
 		opts, err = promptOptions(os.Stdin, os.Stdout, opts)
 		if errors.Is(err, errCancelled) {
@@ -222,6 +228,7 @@ func parseArgs(args []string) (options, bool, error) {
 	fs.IntVar(&o.Size, "size", o.Size, "二维码内部绘制尺寸")
 	fs.StringVar(&o.Output, "out", o.Output, "输出 PNG 路径")
 	fs.BoolVar(&o.Verify, "verify", o.Verify, "生成后调用检测接口回读内容")
+	fs.BoolVar(&o.ShowAppVersion, "app-version", false, "显示程序版本")
 	fs.BoolVar(&interactive, "interactive", false, "进入终端对话模式")
 	if err := fs.Parse(args); err != nil {
 		return options{}, false, err
