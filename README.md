@@ -16,10 +16,10 @@
 
 ## 1. 最快使用
 
-可以从 [GitHub Releases](https://github.com/hhhaiai/cailiao/releases) 下载 Linux、Windows 或 macOS 对应架构的发行包。仓库也包含当前 macOS Apple Silicon 可执行文件，进入项目目录后可以直接运行：
+可以从 [GitHub Releases](https://github.com/hhhaiai/cliimqr/releases) 下载 Linux、Windows 或 macOS 对应架构的发行包。仓库也包含当前 macOS Apple Silicon 可执行文件，进入项目目录后可以直接运行：
 
 ```bash
-cd cailiao
+cd cliimqr
 ./cliimqr
 ```
 
@@ -28,7 +28,7 @@ cd cailiao
 如果只想立即生成 `https://api.dwchainless.com/` 的普通二维码：
 
 ```bash
-cd cailiao
+cd cliimqr
 
 ./cliimqr \
   -text 'https://api.dwchainless.com/' \
@@ -51,7 +51,7 @@ dwchainless.png
 编译：
 
 ```bash
-cd cailiao
+cd cliimqr
 go build -trimpath -buildvcs=false -o cliimqr .
 ```
 
